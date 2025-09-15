@@ -1,31 +1,33 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using LojaBrinquedos.Models;
+using LojaBrinquedos.Repositorio;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
-namespace LojaBrinquedos.Controllers;
-
-public class HomeController : Controller
+namespace LojaBrinquedos.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        private readonly ProdutoRepositorio _produtoRepositorio;
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        public HomeController(ILogger<HomeController> logger, ProdutoRepositorio produtoRepositorio)
+        {
+            _logger = logger;
+            _produtoRepositorio = produtoRepositorio;
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public async Task<IActionResult> Index()
+        {
+            var produtos = await _produtoRepositorio.TodosProdutos();
+            return View(produtos);
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
