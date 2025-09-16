@@ -5,8 +5,9 @@ namespace LojaBrinquedos.Controllers
 {
     public class CarrinhoController : Controller
     {
-        private readonly CarrinhoRepositorio _carrinhoRepositorio;
-        private readonly ProdutoRepositorio _produtoRepositorio;
+        // injeção de dependências ⬇⬇
+        private readonly CarrinhoRepositorio _carrinhoRepositorio; //gerencia as operações no carrinho
+        private readonly ProdutoRepositorio _produtoRepositorio; //busca informações dos produtos no banco de dados.
 
         public CarrinhoController(CarrinhoRepositorio carrinhoRepositorio, ProdutoRepositorio produtoRepositorio)
         {
@@ -15,9 +16,10 @@ namespace LojaBrinquedos.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var cartItems = _carrinhoRepositorio.CarrinhoItems(HttpContext.Session);
+            var cartItems = _carrinhoRepositorio.CarrinhoItems(HttpContext.Session); 
+            //⬆⬆Pega os itens do carrinho que estão na sessão do usuário
             // Iterar sobre os itens do carrinho e buscar os detalhes do produto
-            foreach (var item in cartItems)
+            foreach (var item in cartItems) //Para cada item, busca os detalhes do produto no banco
             {
                 // Certifique-se de que _productRepository está retornando um Product ou null
                 item.Produto = await _produtoRepositorio.ProdutosPorId(item.ProdutoId);
@@ -43,9 +45,11 @@ namespace LojaBrinquedos.Controllers
                 TempData["Message"] = "Produto não encontrado."; // Use TempData para mensagens
                 return RedirectToAction("Index", "Home");
             }
+            //⬆⬆Busca o produto no banco; se não achar, mostra uma mensagem (TempData) e volta para a Home.
 
             _carrinhoRepositorio.AdicionarCarrinho(HttpContext.Session, produto, quantidade);
             return RedirectToAction("Index", "Carrinho");
+            //Se existir, adiciona ao carrinho e redireciona para a página do carrinho.⬆⬆
         }
 
         [HttpPost]
@@ -53,7 +57,8 @@ namespace LojaBrinquedos.Controllers
         {
             _carrinhoRepositorio.AlterarQuantidadeItem(HttpContext.Session, produtoId, novaQuantidade);
             return RedirectToAction("Index");
-        }
+        } 
+        //⬆⬆Era para isso alterar a quantidade, mas no meu (esse) não vai, ele só pisca a tela (ao menos no meu pc). 
 
         [HttpPost]
         public IActionResult RemoveFromCart(int produtoId)
@@ -61,6 +66,7 @@ namespace LojaBrinquedos.Controllers
             _carrinhoRepositorio.RemoverItemCarrinho(HttpContext.Session, produtoId);
             return RedirectToAction("Index");
         }
+        //remove um item do carrinho⬆⬆
 
         [HttpPost]
         public IActionResult LimparCarrinho()
@@ -68,6 +74,6 @@ namespace LojaBrinquedos.Controllers
             _carrinhoRepositorio.LimparCarrinho(HttpContext.Session);
             return RedirectToAction("Index");
         }
-
+        //limpa o carrinho ⬆⬆
     }
 }

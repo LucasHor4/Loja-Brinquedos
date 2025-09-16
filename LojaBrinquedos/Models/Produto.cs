@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LojaBrinquedos.Models
 {
+    // criando a classe produto (deve ser igual do banco de dados)
     public class Produto
     {
 

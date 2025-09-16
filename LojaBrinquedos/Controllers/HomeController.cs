@@ -1,6 +1,7 @@
-using LojaBrinquedos.Models;
+﻿using LojaBrinquedos.Models;
 using LojaBrinquedos.Repositorio;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 using System.Diagnostics;
 
 namespace LojaBrinquedos.Controllers
@@ -11,15 +12,16 @@ namespace LojaBrinquedos.Controllers
 
         private readonly ProdutoRepositorio _produtoRepositorio;
 
+        //⬇⬇⬇ usado para registrar logs da aplicação(mensagens de erro, avisos, etc).
         public HomeController(ILogger<HomeController> logger, ProdutoRepositorio produtoRepositorio)
         {
             _logger = logger;
-            _produtoRepositorio = produtoRepositorio;
+            _produtoRepositorio = produtoRepositorio; //classe que acessa os produtos
         }
 
         public async Task<IActionResult> Index()
         {
-            var produtos = await _produtoRepositorio.TodosProdutos();
+            var produtos = await _produtoRepositorio.TodosProdutos(); //Chama do repositório, que retorna (de forma assíncrona) todos os produtos da loja.
             return View(produtos);
         }
 

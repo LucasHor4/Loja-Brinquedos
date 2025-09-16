@@ -1,6 +1,7 @@
 ﻿namespace LojaBrinquedos.Models
 {
     public class ItemCarrinho
+        //criando a classe carrinho (deve ser igual ao do banco de dados)
     {
         public int ProdutoId { get; set; }
 
