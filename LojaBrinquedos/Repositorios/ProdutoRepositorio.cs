@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using LojaBrinquedos.Models;
 using MySql.Data.MySqlClient;
-using ProjetoLoja.Models;
 
 
 namespace LojaBrinquedos.Repositorio

@@ -41,5 +41,9 @@ select * from produto;
 select * from pedido;
 select * from itemPedido;
 
-insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('J','Descricao Jogo-1',150.00, 'images/jogo1.jpg',10);
-insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('RRR','Roleta russa, remix',550.00, 'images/jogo2.jpg',100);
+insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('MP-44 Optimus Prime','Descricao Jogo-1',1538.00, 'images/prime.jpeg',1000);
+insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('Pelúcia Tralalero Tralala','Tralalero Tralala lalalala',84.99, 'images/trala.jpeg',1000);
+insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('Labubu Marrom','É marrom',357.47, 'images/labu.jpeg',1000);
+insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('Kit Bobbie Goods','O mãe, compra bobbie goods.',163.00, 'images/bob.jpeg',1000);
+insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('Omnitrix Deluxe','A história começou com um relógio esquisito...',269.00, 'images/omni.jpeg',1000);
+insert into Produto(Nome,Descricao,Preco,ImageUrl,Estoque)values('Estatueta P.E.K.K.A Clash Royale','BUTTERFLY💀',893.00, 'images/pekka.jpeg',1000);

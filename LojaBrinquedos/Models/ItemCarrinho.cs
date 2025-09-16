@@ -1,6 +1,4 @@
-﻿using LojaBrinquedos.Models;
-
-namespace ProjetoLoja.Models
+﻿namespace LojaBrinquedos.Models
 {
     public class ItemCarrinho
     {
